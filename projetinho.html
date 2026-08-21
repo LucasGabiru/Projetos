@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>GameDev Summit 2026</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #190B26;
+            color: #f5eaff;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #c77dff;
+            font-size: 40px;
+            text-shadow: 0 0 10px #8b3fc7;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #d8a4ff;
+            text-shadow: 0 0 8px #8b3fc7;
+        }
+
+        h3 {
+            color: #e9d5ff;
+            font-size: 20px;
+            font-weight: normal;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        h4 {
+            color: #ddd0e8;
+            font-size: 17px;
+            font-weight: normal;
+            max-width: 1000px;
+            margin: 15px auto;
+        }
+
+        h1:hover {
+            color: #e0aaff;
+            text-shadow: 0 0 20px #a855f7;
+        }
+
+        /* ---------- Navbar de abas ---------- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: 14px 20px;
+            background-color: rgba(25, 11, 38, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 14px rgba(139, 63, 199, 0.4);
+        }
+
+        .navbar a {
+            color: #e9d5ff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            transition: all 0.25s ease;
+        }
+
+        .navbar a:hover,
+        .navbar a:focus {
+            color: #ffffff;
+            border-color: #a855f7;
+            box-shadow: 0 0 12px #a855f7;
+        }
+
+        .imagem {
+            width: 100%;
+            max-width: 1300px;
+            display: block;
+            margin: 30px auto;
+        }
+
+        .imagem2 {
+            width: 100%;
+            max-width: 600px;
+            display: block;
+            margin: 30px auto;
+        }
+
+        .imagem3 {
+            width: 100%;
+            max-width: 320px;
+            display: block;
+            margin: 30px auto;
+        }
+
+        .formulario {
+            width: 500px;
+            max-width: 90%;
+            margin: 80px auto;
+            padding: 40px;
+            background-color: #2b1a33;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #000;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 14px;
+            font-size: 16px;
+            border: 2px solid #6d3b8c;
+            border-radius: 8px;
+            background-color: #190B26;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #a855f7;
+        }
+
+        button {
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background-color: #8b3fc7;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a855f7;
+        }
+
+        .mensagem-sucesso {
+            display: none;
+            max-width: 500px;
+            margin: 20px auto 0;
+            padding: 16px 20px;
+            background-color: #1f3d2b;
+            border: 1px solid #4ade80;
+            border-radius: 8px;
+            color: #bbf7d0;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: 0 0 14px rgba(74, 222, 128, 0.3);
+        }
+
+        .mensagem-sucesso.mostrar {
+            display: block;
+            animation: aparecer 0.4s ease;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* ---------- Seção de Música ---------- */
+        .musica-wrap {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .faixa {
+            background-color: #2b1a33;
+            border: 1px solid #6d3b8c;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 14px rgba(139, 63, 199, 0.25);
+        }
+
+        .faixa h3 {
+            margin: 0 0 4px;
+            font-size: 18px;
+            color: #e0aaff;
+            text-align: left;
+            max-width: none;
+        }
+
+        .faixa .artista {
+            margin: 0 0 14px;
+            font-size: 14px;
+            color: #b79ccf;
+        }
+
+        .faixa audio {
+            width: 100%;
+        }
+
+        /* deixa o player de áudio combinando com o tema escuro */
+        .faixa audio::-webkit-media-controls-panel {
+            background-color: #190B26;
+        }
+
+        /* ---------- Rodapé ---------- */
+        footer {
+            margin-top: 60px;
+            padding: 40px 20px 30px;
+            text-align: center;
+            background-color: #120819;
+            border-top: 1px solid #6d3b8c;
+            box-shadow: 0 0 20px rgba(139, 63, 199, 0.25) inset;
+        }
+
+        footer .footer-titulo {
+            color: #d8a4ff;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 8px #8b3fc7;
+            margin-bottom: 12px;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        footer .footer-links a {
+            color: #e9d5ff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        footer .footer-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px #a855f7;
+        }
+
+        footer .footer-copy {
+            color: #b79ccf;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="#inicio">Início</a>
+        <a href="#cadastro">Cadastro</a>
+        <a href="#programacao">Programação</a>
+        <a href="#design">Design</a>
+        <a href="#ia">IA</a>
+        <a href="#musica">Música</a>
+    </nav>
+
+    <section id="inicio">
+        <h1>GameDev Summit 2026</h1>
+
+        <h4>
+            Um evento sobre desenvolvimento de jogos, tecnologia e criatividade.
+        </h4>
+
+        <h3>
+            O GameDev Summit 2026 é um evento voltado para pessoas interessadas
+            em desenvolvimento de jogos e tecnologia. Durante o evento, serão
+            apresentados conceitos de programação, criação de personagens,
+            design de jogos, inteligência artificial e desenvolvimento de projetos.
+            É uma oportunidade para iniciantes e desenvolvedores compartilharem
+            conhecimentos, aprenderem novas técnicas e conhecerem as principais
+            áreas da indústria de games.
+        </h3>
+
+        <img class="imagem" src="midias/imagem.png" alt="Imagem do GameDev Summit">
+    </section>
+
+    <section id="cadastro">
+        <h1>Formulário de Cadastro</h1>
+
+        <form id="form-cadastro">
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" minlength="6" required>
+
+            <button type="submit">Cadastrar</button>
+
+        </form>
+
+        <p id="mensagem-sucesso" class="mensagem-sucesso">
+            ✅ Cadastro realizado com sucesso! Em breve você receberá mais informações sobre o evento.
+        </p>
+    </section>
+
+    <script>
+        const formCadastro = document.getElementById("form-cadastro");
+        const mensagemSucesso = document.getElementById("mensagem-sucesso");
+
+        formCadastro.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (formCadastro.checkValidity()) {
+                mensagemSucesso.classList.add("mostrar");
+                formCadastro.reset();
+            } else {
+                mensagemSucesso.classList.remove("mostrar");
+                formCadastro.reportValidity();
+            }
+        });
+    </script>
+
+    <section id="programacao">
+        <img class="imagem2" src="midias/imagem2.png" alt="Programação de Jogos">
+
+        <h4>
+            A programação é uma das partes mais importantes no desenvolvimento
+            de um jogo. É através dela que os desenvolvedores conseguem transformar
+            ideias em ações dentro do jogo, como movimentar personagens, criar
+            inimigos, controlar objetos e desenvolver sistemas de pontuação.
+        </h4>
+
+        <h4>
+            Durante o evento, os participantes poderão conhecer alguns dos
+            principais conceitos utilizados na programação de jogos. Serão
+            apresentados exemplos de lógica de programação, estruturas de código,
+            eventos, condições e outras ferramentas utilizadas para criar
+            diferentes tipos de mecânicas.
+        </h4>
+
+        <h4>
+            Também será mostrado como diferentes partes de um jogo precisam
+            trabalhar juntas. Um simples personagem, por exemplo, pode envolver
+            movimentação, colisões, animações, sons e interações com o ambiente.
+        </h4>
+
+        <h4>
+            O objetivo é mostrar que a programação não serve apenas para escrever
+            códigos, mas também para dar vida às ideias criadas pelos desenvolvedores.
+        </h4>
+    </section>
+
+    <section id="design">
+        <h1>Design e Criação de Jogos</h1>
+
+        <h4>
+            O design de jogos é responsável por transformar uma ideia em uma
+            experiência interessante para o jogador. Ele envolve muito mais do
+            que apenas criar gráficos bonitos, pois também está relacionado à
+            criação de personagens, cenários, desafios, histórias e regras.
+        </h4>
+
+        <h4>
+            Durante o evento, serão apresentados diferentes elementos que fazem
+            parte do design de um jogo. Os participantes poderão conhecer um
+            pouco sobre criação de personagens, construção de mapas,
+            desenvolvimento de ambientes e organização das fases.
+        </h4>
+
+        <h4>
+            Outro ponto importante será a experiência do jogador. Um bom jogo
+            precisa ser divertido, compreensível e interessante, fazendo com
+            que o jogador tenha vontade de continuar explorando.
+        </h4>
+
+        <h4>
+            Também serão apresentados exemplos de como pequenas escolhas de
+            design podem mudar completamente a maneira como uma pessoa
+            interage com um jogo.
+        </h4>
+    </section>
+
+    <section id="ia">
+        <h1>Inteligência Artificial nos Games</h1>
+
+        <h4>
+            A inteligência artificial está cada vez mais presente na criação
+            de jogos modernos. Ela pode ser utilizada para criar comportamentos
+            diferentes para personagens, controlar inimigos e tornar os
+            ambientes virtuais mais dinâmicos.
+        </h4>
+
+        <h4>
+            Durante o evento, serão apresentados exemplos de como a inteligência
+            artificial pode fazer com que personagens controlados pelo computador
+            reajam às ações do jogador.
+        </h4>
+
+        <h4>
+            A IA também pode ser utilizada para criar experiências mais
+            personalizadas. Dependendo das ações do jogador, determinados
+            sistemas podem alterar o nível de dificuldade ou o comportamento
+            dos personagens.
+        </h4>
+
+        <h4>
+            O objetivo dessa parte do evento é mostrar como a inteligência
+            artificial pode ajudar os desenvolvedores a criar jogos mais
+            interessantes, dinâmicos e realistas.
+        </h4>
+    </section>
+
+    <section id="musica">
+        <h1>Trilha Sonora do Evento</h1>
+
+        <h4>
+            Confira algumas das faixas que vão embalar o GameDev Summit 2026.
+        </h4>
+
+        <div class="musica-wrap">
+
+            <div class="faixa">
+                <h3>Faixa 01</h3>
+                <p class="artista">Abertura do evento</p>
+                <audio controls>
+                    <source src="midias/music1.mp3" type="audio/mpeg">
+                    Seu navegador não suporta áudio.
+                </audio>
+            </div>
+
+            <div class="faixa">
+                <h3>Faixa 02</h3>
+                <p class="artista">Trilha de fundo</p>
+                <audio controls>
+                    <source src="midias/music2.mp3" type="audio/mpeg">
+                    Seu navegador não suporta áudio.
+                </audio>
+            </div>
+
+            <div class="faixa">
+                <h3>Faixa 03</h3>
+                <p class="artista">Encerramento</p>
+                <audio controls>
+                    <source src="midias/music3.mp3" type="audio/mpeg">
+                    Seu navegador não suporta áudio.
+                </audio>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-titulo">GameDev Summit 2026</div>
+        <div class="footer-links">
+            <a href="#inicio">Início</a>
+            <a href="#cadastro">Cadastro</a>
+            <a href="#programacao">Programação</a>
+            <a href="#design">Design</a>
+            <a href="#ia">IA</a>
+            <a href="#musica">Música</a>
+        </div>
+        <p class="footer-copy">© 2026 GameDev Summit — Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
